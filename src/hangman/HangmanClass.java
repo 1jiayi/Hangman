@@ -3,7 +3,7 @@
 package hangman;
 import java.util.*;
 import java.io.*;
-
+        
 public class HangmanClass{
     private String myWord; //random word
     private String guess; //user guess
@@ -150,4 +150,5 @@ public class HangmanClass{
         System.out.println(blanks);
     }
     
-}
+       
+ }

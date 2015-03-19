@@ -2,6 +2,7 @@
 //2-4
 package hangman;
 import java.io.*;
+import java.util.*;
 
 public class Hangman {
 
@@ -11,7 +12,7 @@ public class Hangman {
         player.initializeUsedLetters(); //initializes "" to array by default
         player.findWord(); //generates random word
         player.setBlanks(); //sets the "_" needed
-        player.userGuess(); //lets user guess
+        player.userGuess(); //lets user input guess
         player.checkIsAlphabetical(); //checks if user input is alphabetical
         player.isLetterUsed(); //check if letter that user inputs has already been used
         player.addToUsedLettersArray(); //if it is a vaild letter, the letter is stored into an array
@@ -27,85 +28,82 @@ public class Hangman {
             System.out.println("");
             player.setNewBlanks();
         }
-        if(player.getTries()==0){
+        
+        String response;
+        
+        if(player.getTries()==0){ //When player gets 8 letters wrong (loses)
             player.noMoreLives();
             System.out.println("You lose. :-("); //run if player guesses incorrectly 8 times.
+            System.out.println("Play again? (Y/N)");
+            Scanner myResponse=new Scanner(System.in);
+            response=myResponse.next();//Y (yes) or N (no) response
+            response=response.toUpperCase(); //there is no case sensitivity
+            switch(response)
+            {
+                case "Y": //yes case
+                    System.out.println("");
+                    System.out.println("---");
+                    Hangman.main(args); //refresh game
+                    break;
+                case "N":
+                    System.out.println("Game Over. Thank you for playing.");  
+                    break;
+                default: //if player does not enter 'Y' or 'N', this executes and runs until player enters a valid choice
+                    while((!response.equals("Y")) && (!response.equals("N"))) {
+                       System.out.println("Play again? (Y/N)");
+                       response=myResponse.next();
+                       response=response.toUpperCase(); //there is no case sensitivity
+                        switch(response)
+                        {
+                            case "Y": //yes case
+                                System.out.println("");
+                                System.out.println("---");
+                                Hangman.main(args); //refresh game
+                                break;
+                            case "N": //no case
+                                System.out.println("Game Over. Thank you for playing.");   
+                                break;
+                        }
+                    } 
+            }
         }
-        else if(player.getMaxTries()==0){
+       
+        else if(player.getMaxTries()==0){ //When player completes all letters (player wins)
             System.out.println("You win! :-)"); //run if player gets all the letters right.
+            System.out.println("Play again? (Y/N)");
+            Scanner myResponse=new Scanner(System.in);
+            response=myResponse.next();//Y (yes) or N (no) response
+            response=response.toUpperCase(); //there is no case sensitivity
+            switch(response)
+            {
+                case "Y": //yes case
+                    System.out.println("");
+                    System.out.println("---");
+                    Hangman.main(args); //refresh game
+                    break;
+                case "N":
+                    System.out.println("Game Over. Thank you for playing.");  
+                    break;
+                default: //if player does not enter 'Y' or 'N', this executes and runs until player enters a valid choice
+                    while((!response.equals("Y")) && (!response.equals("N"))) {
+                       System.out.println("Play again? (Y/N)");
+                       response=myResponse.next();
+                       response=response.toUpperCase(); //there is no case sensitivity
+                        switch(response)
+                        {
+                            case "Y": //yes case
+                                System.out.println("");
+                                System.out.println("---");
+                                Hangman.main(args); //refresh game
+                                break;
+                            case "N": //no case
+                                System.out.println("Game Over. Thank you for playing.");   
+                                break;
+                        }
+                    } 
+            }        
         }
         
-        
-        /*Scanner myFile = new Scanner(new File("src\\hangman\\wordBank.txt"));
-        Random random = new Random();
-        Scanner input = new Scanner(System.in);
-        
-        int index=-1;
-        String text[]=new String[5000];
-        
-        while(myFile.hasNext()) 
-        {
-            index = index + 1;
-            text[index] = myFile.nextLine();
-        }
-        myFile.close();
-
-        String myWord=(text[random.nextInt(index)]); //generates random index number to print out something from a random part of the array
-        System.out.println(myWord); //used to test program
-        
-        String blanks="";
-        String letter[]=new String[1000]; //letter array
-        int guesses=8; //max number of times players can guess
-        
-        int i = 0;
-        for(i=0;i<myWord.length();i++) { //establishes an array for each blank
-            letter[i]= "_ ";
-            blanks=blanks+letter[i];
-        }
-        
-        System.out.println(blanks);
-        System.out.println();
-        
-        System.out.println("You have " + guesses + " tries.");
-        System.out.print("What is your guess? ");
-        String guess = input.next(); //lets user guess
-        
-        String usedLetters[]=new String[26];
-        int usedLetterIndex=0;
-        
-        boolean letterIsAlreadyUsed=false; //checks if user has input letter that has already been used
-        for(usedLetterIndex=0;usedLetterIndex<26;usedLetterIndex++) {
-            if(guess==usedLetters[usedLetterIndex]) {
-                letterIsAlreadyUsed = true;
-            }
-        }
-        
-        if (guess.length()==1 && letterIsAlreadyUsed==false) {
-            guess=usedLetters[usedLetterIndex]; //adds the guess to the list of used letters
-            usedLetterIndex=usedLetterIndex + 1; //adds new index to store next used letter
-            
-            if (myWord.contains(guess)) { //checks if letter is guessed right
-                System.out.println("True");
-                for(i=0;i<myWord.length();i++) {
-                    if(myWord.substring(i,i+1).equals(guess)){ 
-                        blanks=""; //restarts the blanks
-                        guess=guess + " ";
-                        letter[i]=guess;
-                    }
-                    blanks=blanks+letter[i]; //adds letter to blanks
-                }
-                System.out.println(blanks);
-                System.out.println("You have " + guesses + " tries.");
-            }
-            else {
-                guesses=guesses-1;
-            }
-                    
-        }*/
-
-        //for(int j=0;j<=index;j=j+1) {
-            //System.out.println(text[j]);
-        //}
        
     }  
 }
