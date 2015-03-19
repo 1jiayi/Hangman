@@ -32,7 +32,7 @@ public class Hangman {
         String response;
         
         if(player.getTries()==0){ //When player gets 8 letters wrong (loses)
-            player.noMoreLives();
+            player.noMoreLives(); //prints "You lost all your lives!"
             System.out.println("You lose. :-("); //run if player guesses incorrectly 8 times.
             System.out.println("Play again? (Y/N)");
             Scanner myResponse=new Scanner(System.in);

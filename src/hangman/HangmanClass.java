@@ -10,7 +10,7 @@ public class HangmanClass{
     private String blanks; //"_"
     private int i;
     private final String letter[]=new String[1000];  //array of each letter from the chosen word
-    private final String usedLetters[]=new String[25]; //letters already used
+    private final String usedLetters[]=new String[26]; //letters already used
     private int usedLetterIndex=0;
     private int tries; //number of wrong answers user can guess maximum (player's lives)
     private int maxTries; //maximum amount of tries to finish the game
@@ -75,7 +75,7 @@ public class HangmanClass{
     
    public void initializeUsedLetters() { //default used letters before game starts
     usedLetterIndex=0;
-    while(usedLetterIndex<25) {
+    while(usedLetterIndex<26) {
         usedLetters[usedLetterIndex]="";
         usedLetterIndex=usedLetterIndex+1;
     } 
@@ -84,7 +84,7 @@ public class HangmanClass{
    public void addToUsedLettersArray(){ //stores user guess to array of used letters
        usedLetterIndex=0;
        if(letterIsAlreadyUsed==false && guess.length()==1 && isAlphabet==true ){
-       while(usedLetterIndex<25) {
+       while(usedLetterIndex<26) {
            if(!(usedLetters[usedLetterIndex].equals(""))) {
                usedLetterIndex=1+usedLetterIndex;
            }
@@ -98,7 +98,7 @@ public class HangmanClass{
    
     public void isLetterUsed(){ //checks if letter has been used
         letterIsAlreadyUsed=false;
-        for(usedLetterIndex=0;usedLetterIndex<25;usedLetterIndex++) {
+        for(usedLetterIndex=0;usedLetterIndex<26;usedLetterIndex++) {
             if(guess.equals(usedLetters[usedLetterIndex])) {
                 letterIsAlreadyUsed = true;
             }
